@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+
+<channel>
+<title>Blog</title>
+<link>https://cucybersec.club/</link>
+<description>Carleton Cybersecurity Club</description>
+
+<item>
+<title>CyberSci, Ballot Falsification Write-up</title>
+<link>https://cucybersec.club/blog/cybersci-ballot-falsification/</link>
+<description>
+<![CDATA[
+<p>
+This year's CyberSci competition featured several challenges. I'll cover the first two in the web category and one from the forensics, where the main objective&nbsp;<a href="https://cucybersec.club/blog/cybersci-ballot-falsification/">...</a>
+</p>
+<p><a href="https://cucybersec.club/blog/cybersci-ballot-falsification/">Read More</a></p>
+]]>
+</description>
+<pubDate>Thu, 28 Nov 2024 00:00:00 +0000</pubDate>
+</item>
+<item>
+<title>CyberSci, Voter Registry Defence Write-up</title>
+<link>https://cucybersec.club/blog/cybersci-defence-writeup/</link>
+<description>
+<![CDATA[
+<p>
+This year's CyberSci regionals had several defence challenges which involved patching vulnerable services. Solving these challenges gave us a ton of points and helped us&nbsp;<a href="https://cucybersec.club/blog/cybersci-defence-writeup/">...</a>
+</p>
+<p><a href="https://cucybersec.club/blog/cybersci-defence-writeup/">Read More</a></p>
+]]>
+</description>
+<pubDate>Mon, 25 Nov 2024 00:00:00 +0000</pubDate>
+</item>
+<item>
+<title>The SAR Approach: Responding to Data Leaks with Integrity</title>
+<link>https://cucybersec.club/blog/data-leak/</link>
+<description>
+<![CDATA[
+<p>
+In the world of cybersecurity, you never know what you’ll stumble upon. Sometimes you stumble upon something you shouldn’t have, like a vulnerability in the&nbsp;<a href="https://cucybersec.club/blog/data-leak/">...</a>
+</p>
+<p><a href="https://cucybersec.club/blog/data-leak/">Read More</a></p>
+]]>
+</description>
+<pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+</item>
+
+
+</channel>
+</rss>

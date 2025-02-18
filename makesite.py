@@ -223,5 +223,8 @@ def main():
     make_list(news_posts, '_site/news/rss.xml',
               feed_xml, item_xml, blog='news', title='News', **params)
 
+# Test parameter to be set temporarily by unit tests.
+_test = None
+
 if __name__ == '__main__':
     main()

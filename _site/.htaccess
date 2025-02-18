@@ -1,0 +1,5 @@
+Header add Content-Security-Policy "default-src 'none'; img-src 'self'; style-src 'self'; frame-ancestors 'none';"
+Header add Referrer-Policy "no-referrer"
+Header add Strict-Transport-Security "max-age=63072000"
+Header add X-Content-Type-Options "nosniff"
+Header add X-Frame-Options "DENY"

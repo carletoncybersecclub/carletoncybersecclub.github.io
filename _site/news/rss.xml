@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+
+<channel>
+<title>News</title>
+<link>https://cucybersec.club/</link>
+<description>Carleton Cybersecurity Club</description>
+
+<item>
+<title>Hello World!</title>
+<link>https://cucybersec.club/news/introduction/</link>
+<description>
+<![CDATA[
+<p>
+Introduction What do you do to further publicize a club? I am thrilled to announce, on behalf of the Carleton Cybersecurity Club, that as a&nbsp;<a href="https://cucybersec.club/news/introduction/">...</a>
+</p>
+<p><a href="https://cucybersec.club/news/introduction/">Read More</a></p>
+]]>
+</description>
+<pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+</item>
+
+
+</channel>
+</rss>
