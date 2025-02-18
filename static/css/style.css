@@ -1,0 +1,217 @@
+/* Color Variables */
+:root {
+    --color-text: #e0e0e0;
+    --color-link: #90caf9;
+    --color-background: #0e0f0f;
+    --color-link-hover: #90caf9;
+    --color-nav-bg: #191b1c;
+    --color-nav-link: #cccccc;
+    --color-nav-link-hover: #ffffff;
+    --color-footer-bg: #141819;
+    --color-footer-border: #333333;
+    --color-article-link: #e0e0e0;
+    --color-article-link-hover: #bbbbbb;
+    --color-meta: #aaaaaa;
+    --color-rss-bg: #ff6600;
+    --color-rss-bg-hover: #ff8822;
+    --color-rss-text: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-text: #333333;
+        --color-link: #0000e0;
+        --color-background: #ffffff;
+        --color-link-hover: #0000ff;
+        --color-nav-bg: #333333;
+        --color-nav-link: #cccccc;
+        --color-nav-link-hover: #ffffff;
+        --color-footer-bg: #f0f0f0;
+        --color-footer-border: #e0e0e0;
+        --color-article-link: #333333;
+        --color-article-link-hover: #777777;
+        --color-meta: #777777;
+    }
+}
+
+/* General */
+body {
+    margin: 0;
+    line-height: 1.5em;
+    color: var(--color-text);
+    background: var(--color-background);
+    font-family: helvetica, arial, sans-serif;
+}
+
+pre {
+    overflow: auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+    line-height: 1.2em;
+    margin-top: 1em;
+}
+
+a:link, a:visited {
+    color: var(--color-link);
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+/* Single column layout */
+nav section, header section, main, footer section {
+    max-width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5em;
+}
+
+/* Navigation panel */
+nav {
+    background: var(--color-nav-bg);
+    border-bottom: thin solid #111111;
+    line-height: 3em;
+}
+
+nav a {
+    margin-right: 1em;
+}
+
+nav a:link, nav a:visited {
+    color: var(--color-nav-link);
+}
+
+nav a:hover, nav a:active {
+    color: var(--color-nav-link-hover);
+    text-decoration: none;
+}
+
+@media screen and (min-width: 600px) {
+    nav .links {
+        float: right;
+    }
+}
+
+/* Footer */
+footer {
+    background: var(--color-footer-bg);
+    border-top: thin solid var(--color-footer-border);
+    margin-top: 2em;
+    padding: 1em 0;
+    box-shadow: 0 100vh 0 100vh var(--color-footer-bg);
+    text-align: center;
+}
+
+footer section p {
+    font-size: 0.8em;
+}
+
+footer a {
+    margin-right: 1em;
+}
+
+footer a:last-child {
+    margin-right: 0;
+}
+
+/* Posts */
+article {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+article h2 a:link, article h2 a:visited,
+article h1 a:link, article h1 a:visited,
+.more:link, .more:visited {
+    color: var(--color-article-link);
+}
+
+article h2 a:hover, article h2 a:active,
+article h1 a:hover, article h1 a:active,
+.more:hover, .more:active {
+    color: var(--color-article-link-hover);
+}
+
+p.meta {
+    margin-top: 0;
+    font-size: 0.8em;
+    color: var(--color-meta);
+    font-style: italic;
+}
+
+p.summary {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+div .more {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+/* RSS */
+.rss {
+    padding: 0.3em 0.35em;
+    border-radius: 0.25em;
+    font-size: 0.75em;
+    font-weight: bold;
+}
+
+.rss:link, .rss:visited, .rss:hover, .rss:active {
+    color: var(--color-rss-text);
+    text-decoration: none;
+}
+
+.rss:link, .rss:visited {
+    background: var(--color-rss-bg);
+}
+
+.rss:hover, .rss:active {
+    background: var(--color-rss-bg-hover);
+}
+
+.resource-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.resource {
+    background: var(--color-footer-bg);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px;
+    width: calc(30% - 20px); /* Three columns layout */
+    transition: transform 0.2s;
+}
+.resource:hover {
+    transform: scale(1.05);
+}
+.resource a {
+    text-decoration: none;
+    color: var(--color-link);
+}
+.resource a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .resource {
+        width: calc(45% - 20px); /* Two columns on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .resource {
+        width: calc(100% - 20px); /* Single column on very small screens */
+    }
+}
