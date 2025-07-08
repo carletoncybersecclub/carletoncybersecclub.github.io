@@ -36,12 +36,12 @@
 <p>At the bare minimum one should figure out a few key things (if possible). Firstly, what is in the data? What is the scope of the breach? Secondly, is this an already known leak? Scope being how widespread it is. Thirdly, what is the source? Source being the origin of the data.</p>
 <p><strong><strong>Assess</strong></strong></p>
 <p>To answer the first, one can simply look at the data. In this case the data is TXT files, which anyone can easily open and assess the contents of. There is a list of emails and associated strings.</p>
-<p><img src="/img/pastecontent.png" alt="" /></p>
+<p><img src="/img/max/pastecontent.png" alt="" /></p>
 <p>Spread across the files there is a total of around 100k lines, obviously with some repeating emails. This gives us an answer to the scope, 100k emails and password sets, with possibility of repeats.</p>
 <p><strong>Secondly</strong>, is this person truly “first reporters” of any of this data? To check this (on our limited to non-existent budget as an independent) we may search a larger database within the limitations we have. In this case we check HIBP (<a href="https://haveibeenpwned.com/">Have I Been Pwned</a>), the go to database for checking your email’s existence in leaked databases, <a href="https://haveibeenpwned.com/Pastes">pastes</a>, etc.</p>
-<p><img src="/img/HIBP_1.png" alt="" /></p>
+<p><img src="/img/max/HIBP_1.png" alt="" /></p>
 <p>You can check against the database to see if you have been “pwned”. Without an API key we’re limited by mere mortal hands (or a complicated script, but that process is a question for another day). Taking a random sample of ~200 email addresses shows about 70-80% exist in other data breaches, but the remaining are seemingly new. This can then be extrapolated to mean that there is like around the same amount of new data across the files (since they all have the same source).</p>
-<p><img src="/img/HIBP_2.png" alt="" /></p>
+<p><img src="/img/max/HIBP_2.png" alt="" /></p>
 <p><strong>This third question</strong>, what is the source? This is where it became tricky. The original source was a random chatroom. There appears to be no common threads in the accounts. This is something that is an unanswered question. It’s likely this is just another compilation of leaks like <a href="https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/">Collection #1</a> or “Combolists Posted to Telegram”, but on a much smaller scale.</p>
 <p>Regardless, for the ~30k users that’s data is in here for the first time something needs to be done</p>
 <p><strong><strong>Report</strong></strong></p>

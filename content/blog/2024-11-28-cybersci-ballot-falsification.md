@@ -12,11 +12,11 @@ In the first part, the website provided a sample ballot paper for
 testing. I took a screenshot of the sample ballot and uploaded it, which
 successfully produced the desired output.
 
-![](/img/barcode.png)
+![](/img/folah/barcode.png)
 
 After uploading this, it returned:
 
-![](/img/ballottesting.png)
+![](/img/folah/ballottesting.png)
 
 `FLAG: TESTING-kynjoKdvH63VZpWBXw4TZoq8`
 
@@ -37,7 +37,7 @@ yield the desired results.
 Below is a Python script I wrote to generate multiple barcode variations
 and automate the scanning process.
 
-![](/img/ballotflag.png)
+![](/img/folah/ballotflag.png)
 
 flag=**07XB98CQE155**
 
