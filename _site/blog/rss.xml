@@ -7,6 +7,19 @@
 <description>Carleton Cybersecurity Club</description>
 
 <item>
+<title>Linux Privilege Escalation on HTB: A Beginner's Guide</title>
+<link>https://cucybersec.club/blog/htb-linux-priv-esc/</link>
+<description>
+<![CDATA[
+<p>
+When I first started trying machine labs on HTB (HackTheBox), I struggled a lot with privilege escalation because I only had a very brief introduction&nbsp;<a href="https://cucybersec.club/blog/htb-linux-priv-esc/">...</a>
+</p>
+<p><a href="https://cucybersec.club/blog/htb-linux-priv-esc/">Read More</a></p>
+]]>
+</description>
+<pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
+</item>
+<item>
 <title>Tackling Web Exploitation Challenges</title>
 <link>https://cucybersec.club/blog/tackling-web-exploitation-challenges/</link>
 <description>
