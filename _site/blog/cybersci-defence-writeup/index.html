@@ -27,48 +27,74 @@
 <article>
 <h1><a href="/blog/cybersci-defence-writeup/">CyberSci, Voter Registry Defence Write-up</a></h1>
 <p class="meta">Published on 2024-11-25 by <b>Andrew</b></p>
-<p>This year's CyberSci regionals had several defence challenges which involved patching vulnerable services. Solving these challenges gave us a ton of points and helped us win for our region.
-I'll be going over how I patched three vulnerabilities that were inside of the voter ballot registry.</p>
-<p>If you want to try to solve it yourself first, here are the unmodified service files.
-<a href="/misc/voter-registry.tar.gz">voter-registry.tar.gz</a></p>
-<p>Taking a look at the Dockerfile, it's a pretty simple service. Python is installed, a few libraries, static assets, as well as a key pair (this comes in later).</p>
-<p>The files contained within the service are pretty simple. There's only one script found within there: <code>voter_registry.py</code> which really simplifies things for us.</p>
-<p>We'll start with the two easy fixes and then finish with the one which involves the most code.</p>
-<h2>1. Disabled JWT Verification</h2>
-<p>This bug fix is very easy. For some reason the service came shipped with JWT signature verification disabled by default. If we simply change line 23 from <code>sig_verify = None</code> to <code>sig_verify = True</code>, we enable verification of JWT tokens which ensures that JWT keys haven't been forged by an attacker.</p>
-<h2>2. Unauthorized Access to Voter Records</h2>
-<p>Another super easy thing to check in challenges like this is that all routes have adequate authentication checks. Most of them seem fine except for the <code>/voter/&lt;id&gt;</code> path. It's commented as being only accessible for the admin and the voter themselves. But this check just isn't programmed.</p>
-<p>We can add it with this single if statement:</p>
-<pre><code>    if not user.is_admin() and user.get_id() != id:
-        return get_error_page(&quot;You are not authorized to access this page.&quot;), 403
-</code></pre>
-<h2>3. Signature Forging</h2>
-<p>Very briefly we should look through the comments in the code as often hints are left here. On line 256 in the code responsible for authenticating user's login QR codes, we find this extremely suspicious piece of code.</p>
-<pre><code>    # This is a good enough verification for now
+This year's CyberSci regionals had several defence challenges which involved patching vulnerable services. Solving these challenges gave us a ton of points and helped us win for our region.
+I'll be going over how I patched three vulnerabilities that were inside of the voter ballot registry.
+
+If you want to try to solve it yourself first, here are the unmodified service files.
+<a href="/misc/voter-registry.tar.gz">voter-registry.tar.gz</a>
+
+Taking a look at the Dockerfile, it's a pretty simple service. Python is installed, a few libraries, static assets, as well as a key pair (this comes in later).
+
+The files contained within the service are pretty simple. There's only one script found within there: `voter_registry.py` which really simplifies things for us.
+
+We'll start with the two easy fixes and then finish with the one which involves the most code.
+
+## 1. Disabled JWT Verification
+
+This bug fix is very easy. For some reason the service came shipped with JWT signature verification disabled by default. If we simply change line 23 from `sig_verify = None` to `sig_verify = True`, we enable verification of JWT tokens which ensures that JWT keys haven't been forged by an attacker.
+
+## 2. Unauthorized Access to Voter Records
+
+Another super easy thing to check in challenges like this is that all routes have adequate authentication checks. Most of them seem fine except for the `/voter/<id>` path. It's commented as being only accessible for the admin and the voter themselves. But this check just isn't programmed.
+
+We can add it with this single if statement:
+
+```
+    if not user.is_admin() and user.get_id() != id:
+        return get_error_page("You are not authorized to access this page."), 403
+```
+
+## 3. Signature Forging
+
+Very briefly we should look through the comments in the code as often hints are left here. On line 256 in the code responsible for authenticating user's login QR codes, we find this extremely suspicious piece of code.
+
+```
+    # This is a good enough verification for now
     if len(signature) != 64:
         return None
-</code></pre>
-<p>This is not good enough verification! We could easily forge a signature that matches these requirements and log in as any user.</p>
-<p>For example if we check the <code>voter-list.db</code> file we can see that &quot;Nieves Ugarte&quot; is an admin, and his id is &quot;273-85-2654&quot; we could forge a QR code to contain the required JSON to log us in as him. We'll insert his id and then base64 encode some arbitrary 64 character string:</p>
-<pre><code>{
-    &quot;id&quot;:  &quot;273-85-2564&quot;,
-    &quot;sig&quot;: &quot;YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ==&quot;
+```
+
+This is not good enough verification! We could easily forge a signature that matches these requirements and log in as any user.
+
+For example if we check the `voter-list.db` file we can see that "Nieves Ugarte" is an admin, and his id is "273-85-2654" we could forge a QR code to contain the required JSON to log us in as him. We'll insert his id and then base64 encode some arbitrary 64 character string: 
+
+```
+{
+    "id":  "273-85-2564",
+    "sig": "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
 }
-</code></pre>
-<p>If you submit a QR code with this info to the login system it'll log you straight in as &quot;Nieves Ugarte&quot;. How can we fix this?</p>
-<p>Well if you look back to the code you'll find something else suspicious. Those keys that are copied into the docker container are nowhere mentioned in the code. Additionally, asymmetric key encryption libraries are imported but never used.</p>
-<p>Gathering this info we can assume that the signatures which are embedded within the QR codes are signed with the private key in the service file.</p>
-<p>We can replace the previous verification code with the following which uses the public key to verify the signature:</p>
-<pre><code>    try:
+```
+
+If you submit a QR code with this info to the login system it'll log you straight in as "Nieves Ugarte". How can we fix this?
+
+Well if you look back to the code you'll find something else suspicious. Those keys that are copied into the docker container are nowhere mentioned in the code. Additionally, asymmetric key encryption libraries are imported but never used.
+
+Gathering this info we can assume that the signatures which are embedded within the QR codes are signed with the private key in the service file.
+
+We can replace the previous verification code with the following which uses the public key to verify the signature:
+
+```
+    try:
         key = ECC.import_key(open('public_key.pem').read())
         verifier = eddsa.new(key, 'rfc8032')
         message = payload['id'].encode('utf-8')
         verifier.verify(message, signature)
     except (ValueError, Exception) as e:
-        print(f&quot;Signature verification failed: {e}&quot;)
+        print(f"Signature verification failed: {e}")
         return None
-</code></pre>
-<p>Now our previous exploit of forging a signature will no longer work.</p>
+```
+
+Now our previous exploit of forging a signature will no longer work.
 
 </article>
 
