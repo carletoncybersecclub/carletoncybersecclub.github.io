@@ -7,6 +7,19 @@
 <description>Carleton Cybersecurity Club</description>
 
 <item>
+<title>WiFi: Why-Guess</title>
+<link>https://cucybersec.club/blog/why-guess/</link>
+<description>
+<![CDATA[
+<p>
+Introduction It is common knowledge (hopefully) nowadays that default credentials such as admin/admin are unsafe and should be changed immediately when setting up a service,&nbsp;<a href="https://cucybersec.club/blog/why-guess/">...</a>
+</p>
+<p><a href="https://cucybersec.club/blog/why-guess/">Read More</a></p>
+]]>
+</description>
+<pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
+</item>
+<item>
 <title>Linux Privilege Escalation on HTB: A Beginner's Guide</title>
 <link>https://cucybersec.club/blog/htb-linux-priv-esc/</link>
 <description>

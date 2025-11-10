@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WiFi: Why-Guess - Carleton Cybersecurity Club</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body id="why-guess">
+
+<nav>
+<section>
+    <span class="home">
+        <a href="/">Home</a>
+    </span>
+    <span class="links">
+        <a href="/blog/">Blog</a>
+        <a href="/news/">News</a>
+        <a href="/contact/">Contact</a>
+        <a href="/resources/">Resources</a>
+    </span>
+</section>
+</nav>
+
+<main>
+<article>
+<h1><a href="/blog/why-guess/">WiFi: Why-Guess</a></h1>
+<p class="meta">Published on 2025-11-09 by <b>sobbing</b></p>
+<h3>Introduction</h3>
+<p>It is common knowledge (hopefully) nowadays that default credentials such as <code>admin/admin</code> are unsafe and should be changed immediately when setting up a service, but does this logic also apply to Wi-Fi passwords?</p>
+<h3>The Problem</h3>
+<p>At a glance, Wi-Fi passwords look like they are fully <strong>secure</strong> and <strong>randomized</strong>. While this is true to some extent, this can also quickly be debunked when understanding the keyspace that those passwords are based off of.</p>
+<p>Let's image this scenario:</p>
+<blockquote>
+<p>Bob tells us he has a fully randomized password. Bob tells us the password is 8 characters. Bob tells us he doesn't use special characters. Bob also doesn't like lowercase letters since they are too small. Bob tells us he doesn't like using letters passed <code>F</code> in the alphabet.</p>
+</blockquote>
+<p><strong>From all this info, what can we take away?</strong></p>
+<ol>
+<li>Password is 8 random characters: <em>We know the alphabet has 26 lowercase letters and 26 uppercase which totals to <code>52</code>. There are <code>10</code> numbers which totals to <code>62</code> possible characters. Lets not forget the <code>33</code> special characters (including <code>space</code>) which totals to <code>95</code> possible characters to choose from. This leads us to <code>95^8</code> possible passwords. Thats alright I guess, right?</em></li>
+<li>Password doesnt use special characters: <em>So now we go back to having just <code>62</code> possible characters which totals to <code>62^8</code> possible passwords. Not great, but surely it can't get worse than that right?</em></li>
+<li>Password doesn't use any lowercase letters: <em>We go from having 62 possible characters to choose from, all the way to 36 possible characters to pick from which totals <code>36^8</code> possible passwords. Lets not make this any worse than this Bob, please!!!!</em></li>
+<li>Password doesn't use any character passed the letter <code>F</code>: <em>We now have a total of <code>16^8</code> possible passwords. Although this may seem like a big number, it really isn't. Not even close.</em></li>
+</ol>
+<p>If you are thinking &quot;Wow, I would never let Bob configure my password ever in my life&quot;, you are completely right! But turns out Bob is actually your own ISP! This example was taken off of Bell's Wi-Fi password keyspace. This is just an example, but there are much much much more. Bell is not the only one so dont think you are safe just because you are using another provider. If you are using a default AP name, you are only a bigger target since you may give an attacker the information they need to find its keyspace to target you. For example, if an attacker sees you are using <strong>BELLXXX</strong>, they know there are a total of <code>16^8</code> possible passwords, whereas <strong>BELLXXXX</strong> will have a slightly larger keyspace since it now requires 10 characters instead of 8 characters. This can allow an attacker to get access into your network easily within a couple of days if they are able to capture something like the WPA-2 handshake which allows them to crack the passphrase offline.</p>
+<h3>Remediation</h3>
+<p>Change the defaults to something more secure. It really is that simple.</p>
+
+</article>
+
+</main>
+
+<footer>
+<section>
+<p>&copy; 2025 Carleton Cybersecurity Club</p>
+<p>
+    <a href="https://discord.gg/udvZJBRvJp">Discord</a>
+    <a href="https://www.instagram.com/carletoncybersecurityclub/">Instagram</a>
+    <a href="https://ca.linkedin.com/company/carleton-cyber-security-club">Linkedin</a>
+    <a href="mailto:cyberseccarleton@gmail.com">Email</a>
+</p>
+</section>
+</footer>
+
+</body>
+</html>
