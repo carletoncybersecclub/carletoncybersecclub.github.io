@@ -1,6 +1,8 @@
 <!-- title: The Necessity of Ad Block -->
 <!-- author: Alan Zhou -->
 
+# The Necessity of Ad Block
+
 According to Charles “Penguinz0” White Jr., “Internet Is Unusable Without
 Ad Block” on YouTube. Using an ad blocker provides essential cybersecurity
 protections and enhances privacy while browsing the web. As a result,

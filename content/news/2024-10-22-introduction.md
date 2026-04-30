@@ -1,6 +1,8 @@
 <!-- title: Hello World! -->
 <!-- author: Club Executive -->
 
+# Hello World!
+
 ## Introduction
 
 What do you do to further publicize a club?

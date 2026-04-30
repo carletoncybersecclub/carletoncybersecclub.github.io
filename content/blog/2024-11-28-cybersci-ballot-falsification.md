@@ -1,6 +1,8 @@
 <!-- title: CyberSci, Ballot Falsification Write-up -->
 <!-- author: Folah -->
 
+# CyberSci, Ballot Falsification Write-up
+
 This year's CyberSci competition featured several challenges. I'll cover the
 first two in the web category and one from the forensics, where the main
 objective was to falsify election results by submitting modified ballot papers.

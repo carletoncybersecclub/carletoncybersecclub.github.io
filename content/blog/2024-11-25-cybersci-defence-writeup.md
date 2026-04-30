@@ -1,6 +1,8 @@
 <!-- title: CyberSci, Voter Registry Defence Write-up -->
 <!-- author: Andrew -->
 
+# CyberSci, Voter Registry Defence Write-up
+
 This year's CyberSci regionals had several defence challenges which involved
 patching vulnerable services. Solving these challenges gave us a ton of points
 and helped us win for our region. I'll be going over how I patched three

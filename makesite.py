@@ -62,6 +62,10 @@ def truncate(text, words=25):
     return ' '.join(re.sub('(?s)<.*?>', ' ', text).split()[:words])
 
 
+def strip_element(xml: str, tag: str) -> str:
+    """Strip first occurrence of XML element if it exists."""
+    return xml[:xml.find('<' + tag + '>')] + xml[xml.find('</' + tag + '>') + len(tag) + len('</>'):].lstrip('\n')
+
 def read_headers(text):
     """Parse headers in text and yield (key, value, end-index) tuples."""
     for match in re.finditer(r'\s*<!--\s*(.+?)\s*:\s*(.+?)\s*-->\s*|.+', text):
@@ -104,6 +108,10 @@ def read_content(filename):
                 raise ImportError('Error forced by test')
             import commonmark
             text = commonmark.commonmark(text)
+
+            # Strip duplicate level 1 heading if present.
+            if text != None:
+                text = strip_element(text, 'h1')
         except ImportError as e:
             log('WARNING: Cannot render Markdown in {}: {}', filename, str(e))
 

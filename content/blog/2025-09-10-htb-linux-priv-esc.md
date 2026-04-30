@@ -1,6 +1,8 @@
 <!-- title: Linux Privilege Escalation on HTB: A Beginner's Guide -->
 <!-- author: sobbing -->
 
+# Linux Privilege Escalation on HTB: A Beginner's Guide
+
 When I first started trying machine labs on HTB (HackTheBox), I struggled a lot
 with privilege escalation because I only had a very brief introduction to it
 without actually learning it. I was mainly focusing on AD (Active Directory) at
