@@ -27,17 +27,16 @@
 <article>
 <h1><a href="/blog/cybersci-ballot-falsification/">CyberSci, Ballot Falsification Write-up</a></h1>
 <p class="meta">Published on 2024-11-28 by <b>Folah</b></p>
-<p>This year's CyberSci competition featured several challenges. I'll
-cover the first two in the web category and one from the forensics,
-where the main objective was to falsify election results by submitting
-modified ballot papers.</p>
+<p>This year's CyberSci competition featured several challenges. I'll cover the
+first two in the web category and one from the forensics, where the main
+objective was to falsify election results by submitting modified ballot papers.</p>
 <h2>Part 1: Uploading a Screenshot</h2>
-<p>In the first part, the website provided a sample ballot paper for
-testing. I took a screenshot of the sample ballot and uploaded it, which
-successfully produced the desired output.</p>
-<p><img src="/img/folah/barcode.png" alt="" /></p>
+<p>In the first part, the website provided a sample ballot paper for testing. I
+took a screenshot of the sample ballot and uploaded it, which successfully
+produced the desired output.</p>
+<p><img src="/img/folah/barcode.png" alt="A simple sample ballot with a standard barcode to the right." /></p>
 <p>After uploading this, it returned:</p>
-<p><img src="/img/folah/ballottesting.png" alt="" /></p>
+<p><img src="/img/folah/ballottesting.png" alt="A web page to upload ballots, including buttons to select an image file and another to execute a scan. The testing flag is listed in a log at the bottom of the page." /></p>
 <p><code>FLAG: TESTING-kynjoKdvH63VZpWBXw4TZoq8</code></p>
 <h2>Part 2: Modifying the Barcode</h2>
 <p>In the second part, the task was to submit a modified version of the
@@ -51,32 +50,32 @@ yield the desired results.</p>
 <p><strong>Final Approach:</strong> I decided to modify only the last digit of the barcode.
 Below is a Python script I wrote to generate multiple barcode variations
 and automate the scanning process.</p>
-<p><img src="/img/folah/ballotflag.png" alt="" /></p>
+<p><img src="/img/folah/ballotflag.png" alt="An administration panel including the ballot machine ID." /></p>
 <p>flag=<strong>07XB98CQE155</strong></p>
-<h1>Forensics Challenge: Data is the new currency</h1>
-<p>In this challenge, we were given a <a href="/misc/artifact.pcap">PCAP file</a>
-that captured the communication flow between two individuals. The task
-was to determine the file sent to a customer who had just purchased access
-to the voter information service.</p>
-<h2>Challenge Details</h2>
+<h2>Forensics Challenge: Data is the new currency</h2>
+<p>In this challenge, we were given a <a href="/misc/artifact.pcap">PCAP file</a> that
+captured the communication flow between two individuals. The task was to
+determine the file sent to a customer who had just purchased access to the
+voter information service.</p>
+<h3>Challenge Details</h3>
 <p>The hint mentioned that two types of cryptography were used: AES-CBC
 and RSA. AES-CBC was likely used for encryption, while RSA handled
 public and private key exchanges. From this, I inferred that the
 communication was encrypted and needed to be analyzed
 accordingly.</p>
-<h2>Approach</h2>
-<h3>Analyzing the PCAP File</h3>
+<h3>Approach</h3>
+<h4>Analyzing the PCAP File</h4>
 <p>I wrote a Python script to parse the PCAP file and identify the
 protocols in use. Based on the data flow, I determined that the most
 likely communication methods were HTTP or SMTP.</p>
-<h3>Extracting Encrypted and Non-Encrypted Data</h3>
+<h4>Extracting Encrypted and Non-Encrypted Data</h4>
 <p>For HTTP packets, I used Scapy to create another Python script that
 extracted and printed both encrypted and plaintext payloads.</p>
 <p>Since the SMTP packets were relatively few, I decided to manually
 inspect them for any relevant information.</p>
 <p>By combining automated analysis and manual inspection, I was able to
 piece together the details and identify the file in question.</p>
-<p>Here is the <a href="/misc/forensic.py">python script</a>.</p>
+<p>Here is the <a href="/misc/forensic.py">python script</a>`.</p>
 <p>Alternatively using wireshark by putting this display filter
 <code>http.request.method == \&quot;GET\&quot; &amp;&amp; (http.request.uri contains \&quot;flag\&quot; \|\| http.request.uri contains \&quot;.\&quot;)</code> it returns all http GET packets
 that have the word &quot;flag&quot; or have a file extension.</p>

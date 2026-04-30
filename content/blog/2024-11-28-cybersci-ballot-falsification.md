@@ -1,22 +1,21 @@
 <!-- title: CyberSci, Ballot Falsification Write-up -->
 <!-- author: Folah -->
 
-This year's CyberSci competition featured several challenges. I'll
-cover the first two in the web category and one from the forensics,
-where the main objective was to falsify election results by submitting
-modified ballot papers.
+This year's CyberSci competition featured several challenges. I'll cover the
+first two in the web category and one from the forensics, where the main
+objective was to falsify election results by submitting modified ballot papers.
 
 ## Part 1: Uploading a Screenshot
 
-In the first part, the website provided a sample ballot paper for
-testing. I took a screenshot of the sample ballot and uploaded it, which
-successfully produced the desired output.
+In the first part, the website provided a sample ballot paper for testing. I
+took a screenshot of the sample ballot and uploaded it, which successfully
+produced the desired output.
 
-![](/img/folah/barcode.png)
+![A simple sample ballot with a standard barcode to the right.](/img/folah/barcode.png)
 
 After uploading this, it returned:
 
-![](/img/folah/ballottesting.png)
+![A web page to upload ballots, including buttons to select an image file and another to execute a scan. The testing flag is listed in a log at the bottom of the page.](/img/folah/ballottesting.png)
 
 `FLAG: TESTING-kynjoKdvH63VZpWBXw4TZoq8`
 
@@ -37,18 +36,18 @@ yield the desired results.
 Below is a Python script I wrote to generate multiple barcode variations
 and automate the scanning process.
 
-![](/img/folah/ballotflag.png)
+![An administration panel including the ballot machine ID.](/img/folah/ballotflag.png)
 
 flag=**07XB98CQE155**
 
-# Forensics Challenge: Data is the new currency
+## Forensics Challenge: Data is the new currency
 
-In this challenge, we were given a <a href="/misc/artifact.pcap">PCAP file</a> 
-that captured the communication flow between two individuals. The task 
-was to determine the file sent to a customer who had just purchased access 
-to the voter information service.
+In this challenge, we were given a [PCAP file](/misc/artifact.pcap) that
+captured the communication flow between two individuals. The task was to
+determine the file sent to a customer who had just purchased access to the
+voter information service.
 
-## Challenge Details
+### Challenge Details
 
 The hint mentioned that two types of cryptography were used: AES-CBC
 and RSA. AES-CBC was likely used for encryption, while RSA handled
@@ -56,15 +55,15 @@ public and private key exchanges. From this, I inferred that the
 communication was encrypted and needed to be analyzed
 accordingly.
 
-## Approach
+### Approach
 
-### Analyzing the PCAP File
+#### Analyzing the PCAP File
 
 I wrote a Python script to parse the PCAP file and identify the
 protocols in use. Based on the data flow, I determined that the most
 likely communication methods were HTTP or SMTP.
 
-### Extracting Encrypted and Non-Encrypted Data
+#### Extracting Encrypted and Non-Encrypted Data
 
 For HTTP packets, I used Scapy to create another Python script that
 extracted and printed both encrypted and plaintext payloads.
@@ -75,7 +74,7 @@ inspect them for any relevant information.
 By combining automated analysis and manual inspection, I was able to
 piece together the details and identify the file in question.
 
-Here is the <a href="/misc/forensic.py">python script</a>.
+Here is the [python script](/misc/forensic.py)`.
 
 Alternatively using wireshark by putting this display filter
 `http.request.method == \"GET\" && (http.request.uri contains \"flag\"
