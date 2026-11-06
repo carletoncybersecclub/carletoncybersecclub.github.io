@@ -23,7 +23,7 @@ This means that you can participate on either platform and not be left out!
 The club will likely **never abandon Discord**.
 It is the common denominator platform and the Cybersec Club *exists* for the layman.
 
-# IRC Presence
+## IRC Presence
 
 Join the bridge on the OFTC IRC network on `#cucybersec`.
 Before you can participate you must register with NickServ.
